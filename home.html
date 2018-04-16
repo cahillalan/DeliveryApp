@@ -2,6 +2,8 @@
 
 
 {% block maincontent %}
+<h1>
+</h1>
   <table class="table">
     <thead class="thead-inverse">
       <tr>
@@ -13,12 +15,12 @@
         <tr>
           <td>
             {{ rest.user.username }}
-			'alan'
+			
             
           </td>
 		  <td class="align-middle">{{ rest.username }}</td>
 		  <td>
-            <a href="{% url 'restaurant_menu' rest.pk %}">{{ rest.user.first_name }}</a>
+            <a href="{% url 'restaurant_menu' rest.user.id %}">{{ rest.user.first_name }}</a>
           </td>
         </tr>
       {% endfor %}

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from appitems.models import Menu
 from django.forms import ModelForm
+from django.shortcuts import get_object_or_404, redirect, render_to_response
 
 from accounts.models import Customer, User, Restaurant
 
@@ -50,3 +51,10 @@ class DriverSignUpForm(UserCreationForm):
         user.save()
         driver = Driver.objects.create(user=user)
         return user
+
+class RestaurantUpdateForm(forms.ModelForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'first_name')
+

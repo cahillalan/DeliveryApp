@@ -1,14 +1,19 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView
 from django.contrib.auth import login as auth_login
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
-from .forms import CustomerSignUpForm,RestaurantSignUpForm,DriverSignUpForm
+
+from .forms import CustomerSignUpForm,RestaurantSignUpForm,DriverSignUpForm,RestaurantUpdateForm
 from .models import User
 from django.http import HttpResponse
-from .models import Customer
+from .models import Customer,Restaurant
 
 
 def customer_signup(request):
@@ -43,4 +48,19 @@ def driver_signup(request):
     else:
         form = DriverSignUpForm()
     return render(request, 'driver_signup.html', {'form': form})
+## added in the restaurant updatview
+
+@login_required
+def RestaurantUpdateView(request,pk):
+    restaurant = get_object_or_404(Restaurant,pk=pk)
+    if request.method == 'POST':
+        form = RestaurantUpdateForm(request.POST)
+        if form.is_valid():
+            restaurant = form.save()
+            return render(request, 'restaurant_account.html', {'rest': restaurant, 'form': form})
+    else:
+        form = RestaurantUpdateForm()
+    return render(request, 'restaurant_account.html', {'rest': restaurant,'form': form})
+
+
 
