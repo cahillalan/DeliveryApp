@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Restaurants</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rest in restaurants %}
+        <tr>
+          <td>
+            {{ rest.user.username }}
+			'alan'
+            
+          </td>
+		  <td class="align-middle">{{ rest.username }}</td>
+		  <td>
+            <a href="{% url 'restaurant_menu' rest.pk %}">{{ rest.user.first_name }}</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
