@@ -27,9 +27,9 @@ urlpatterns = [
     url(r'^signup/restaurant$', accounts_views.restaurant_signup, name='restaurant_signup'),
     url(r'^signup/driver$', accounts_views.driver_signup, name='driver_signup'),
     url(r'^menulist/$', appitems_views.MenuListView.as_view(), name='menu_view'),
-    url(r'^menu/(?P<pk>\d+)/new/$', appitems_views.new_menu, name='new_menu'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^menu/(?P<pk>\d+)/$', appitems_views.MenuView, name='restaurant_menu'),
-
+    url(r'^settings/account/$', accounts_views.RestaurantUpdateView.as_view(template_name='restaurant_account.html'), name='restaurant_account'),
+## added restaurant_account url
 ]
