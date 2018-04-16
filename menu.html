@@ -13,10 +13,11 @@
     <tbody>
       {% for m in menu %}
        <tr>
+	   <td>
+            {{ m.name }}            
+          </td>
           <td>
-            {{ m.price }}
-			'alan'
-            
+            {{ m.price }}            
           </td>
 		 
         </tr>
@@ -24,4 +25,13 @@
     </tbody>
   </table>
 
+{% endblock %}
+{% block mainbody %}
+  <div class="container">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Create a Menu Item</button>
+    </form>
+  </div>
 {% endblock %}
