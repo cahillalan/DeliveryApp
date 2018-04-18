@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import AbstractUser
 from django.http import Http404
 from appitems.forms import MenuItemForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from deliveryapp.decorators import user_is_restaurant,user_is_customer,user_is_driver
 
 
 
@@ -23,19 +26,19 @@ def home(request):
         menu_list.append(men.restaurant)
 
     for rest in restaurants:
-        rest_names.append(str(rest.user.id))
-
-    print(rest_names)
+        rest_names.append(rest.user.username)
 
     response_html = '<br>'.join(rest_names)
 
     return HttpResponse(response_html)
 
-class MenuListView(ListView):
-    model = Restaurant
-    context_object_name = 'restaurants'
-    template_name = 'home.html'
 
+##changed menulistview to definition view in order to use the decorators
+@login_required
+@user_is_customer
+def MenuListView(request):
+    restaurants = Restaurant.objects.all()
+    return render(request, 'home.html', {'restaurants': restaurants})
 
 def MenuView(request, pk):
     menuitem = list()
@@ -43,8 +46,6 @@ def MenuView(request, pk):
     for i in items:
         if i.menu.id is int(pk):
             menuitem.append(i)
-            print(pk)
-
 
     my_menu = get_object_or_404(Menu, pk=pk)
     if request.method == 'POST':
@@ -59,13 +60,11 @@ def MenuView(request, pk):
             items = MenuItem.objects.all()
             for i in items:
                 if i.menu.id is int(pk):
-
                     menuitem.append(i)
         return render(request, 'menu.html', {'menu': menuitem,'form': form})
     else:
         form = MenuItemForm()
     return render(request, 'menu.html', {'menu': menuitem,'form': form})
-## deleted new menu class, not needed
 
 def login(request):
     if request.method == 'POST':
