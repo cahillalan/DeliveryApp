@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block maincontent %}
-  <h2>Restaurant Account</h2>
+  <h2>Driver Account</h2>
 {% endblock %}
 
 {% block mainbody %}
@@ -10,7 +10,7 @@
     <form method="post" novalidate>
       {% csrf_token %}
       {{ form.as_p }} 
-	  <a href="{% url 'restaurant_menu' user.id %}">Menu Edit</a>
+
 	  
 	  <br></br>
 	  
