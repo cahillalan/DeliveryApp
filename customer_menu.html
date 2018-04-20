@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+
+   <table>
+    <thead >
+      <tr>
+        <th>MenuItem</th>
+        <th>Cost</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in menu %}
+       <tr>
+	   <td>
+            {{ m.name }}            
+          </td>
+          <td>
+            {{ m.price }}            
+          </td>
+		 
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+{% block mainbody %}
+  <div class="container">
+    <h2>OrderView </h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }} 
+
+	  
+	  <br></br>
+	  
+      <button type="submit" class="btn btn-primary">Order</button>
+	  
+	  
+    </form>
+  </div>
+{% endblock %}

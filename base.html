@@ -7,7 +7,15 @@
   <body>
   <h1>
   <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
-    <a href="{% url 'my_account' user.id %}" class="btn btn-outline-secondary">My Account</a>
+    {% if user.is_restaurant %}
+    <a href="{% url 'restaurant_account' %}" class="btn btn-outline-secondary">My Account</a>
+	{% elif user.is_customer %}
+	<a href="{% url 'customer_account' %}" class="btn btn-outline-secondary">My Account</a>
+	{% else %}
+	<a href="{% url 'driver_account' %}" class="btn btn-outline-secondary">My Account</a>
+	{% endif %}
+	<a href="{% url 'logout' %}" class="btn btn-outline-secondary">Logout</a>
+	
 
   </h1>
     <div class="container">

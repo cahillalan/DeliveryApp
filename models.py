@@ -1,12 +1,23 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from appitems.models import Menu
+
+class User(AbstractUser):
+    is_customer = models.BooleanField(default=False)
+    is_restaurant = models.BooleanField(default=False)
+    is_driver = models.BooleanField(default=False)
 
 
-class Menu(models.Model):
-    restaurant = models.CharField(max_length=255)
-    views = models.PositiveIntegerField(default=0)
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    address = models.CharField(max_length=255)
 
-class MenuItem(models.Model):
-    name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits = 10, decimal_places=2)
-    last_updated = models.DateTimeField(auto_now_add=True)
-    menu = models.ForeignKey(Menu,on_delete=models.CASCADE, related_name='menuitem')
+class Restaurant(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    address = models.CharField(max_length=255)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu')
+
+
+class Driver(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    vehiclereg = models.CharField(max_length=255)

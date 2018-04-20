@@ -26,13 +26,14 @@ urlpatterns = [
     url(r'^signup/customer$', accounts_views.customer_signup, name='customer_signup'),
     url(r'^signup/restaurant$', accounts_views.restaurant_signup, name='restaurant_signup'),
     url(r'^signup/driver$', accounts_views.driver_signup, name='driver_signup'),
-    url(r'^menulist/$', appitems_views.MenuListView.as_view(), name='menu_view'),
+    url(r'^menulist/$', appitems_views.MenuListView, name='menu_view'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^menu/(?P<pk>\d+)/$', appitems_views.MenuView, name='restaurant_menu'),
     url(r'^settings/account/restaurant$', accounts_views.RestaurantUpdateView.as_view(template_name='restaurant_account.html'), name='restaurant_account'),
     url(r'^settings/account/customer$', accounts_views.CustomerUpdateView.as_view(template_name='customer_account.html'),name='customer_account'),
     url(r'^settings/account/driver$', accounts_views.DriverUpdateView.as_view(template_name='driver_account.html'),name='driver_account'),
+    url(r'^customer_menu/(?P<pk>\d+)/$', appitems_views.CustomerMenuView, name='customer_menu'),
 
     ## added restaurant_account url
 ]
