@@ -23,3 +23,14 @@ class Order(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete = models.CASCADE, related_name = 'onorder')
     cost = models.DecimalField(max_digits = 100, decimal_places=2)
 
+class AccountDetails(models.Model):
+    cardNumber = models.DecimalField(max_digits = 10,decimal_places = 0)
+    securityNumber = models.DecimalField(max_digits = 3,decimal_places = 0)
+    cardHolderName = models.CharField(max_length = 50)
+    expiryDate = models.DateField()
+    pinNumber = models.DecimalField(max_digits = 4,decimal_places = 0)
+    owner = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'accountOwner')
+
+
+
+

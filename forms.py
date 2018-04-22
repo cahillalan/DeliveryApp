@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from appitems.models import MenuItem
+from appitems.models import MenuItem,AccountDetails
 from django.contrib.auth.models import User
 from accounts.models import Customer,Restaurant,Driver
 
@@ -37,3 +37,4 @@ class OrderForm(forms.Form):
             myfields = list()
             self.fields[a.id]=forms.BooleanField(label=a.name, required=False)
             self.fields[a.name] = forms.IntegerField(label='amount',required = True)
+

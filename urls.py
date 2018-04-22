@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^settings/account/customer$', accounts_views.CustomerUpdateView.as_view(template_name='customer_account.html'),name='customer_account'),
     url(r'^settings/account/driver$', accounts_views.DriverUpdateView.as_view(template_name='driver_account.html'),name='driver_account'),
     url(r'^customer_menu/(?P<pk>\d+)/$', appitems_views.CustomerMenuView, name='customer_menu'),
+    url(r'^settings/account/customer/accountdetails$',accounts_views.AccountDetailsView.as_view(template_name='account_details.html'), name='account_details'),
 
     ## added restaurant_account url
 ]

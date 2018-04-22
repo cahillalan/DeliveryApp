@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+  <h2>Bank Account Details</h2>
+{% endblock %}
+
+{% block mainbody %}
+  <div class="container">
+    <h2>My Account Details </h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }} 
+
+	  
+	  <br></br>
+	  
+      <button type="submit" class="btn btn-primary">Update Account</button>
+	  
+	  
+    </form>
+  </div>
+{% endblock %}
