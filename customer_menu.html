@@ -29,9 +29,31 @@
   <div class="container">
     <h2>OrderView </h2>
     <form method="post" novalidate>
-      {% csrf_token %}
-      {{ form.as_p }} 
-
+	{% csrf_token %}
+		<table>
+    <thead >
+      <tr>
+        <th>MenuItem</th>
+        <th>Cost</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in menu %}
+       <tr>
+	   <td>
+            {{ m.name }}            
+          </td>
+          <td>
+            {{ m.price }}            
+          </td>
+		  
+		  <td><input type="checkbox" name={{m.tagname}} /></td>
+		 
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 	  
 	  <br></br>
 	  

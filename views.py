@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from accounts.models import Customer,Restaurant,Driver
-from appitems.models import Menu, MenuItem
+from appitems.models import MenuItem
+from appitems.otherModel import Menu
 from django.views.generic import UpdateView, ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import resolve, reverse
@@ -66,6 +67,7 @@ def MenuView(request, pk):
         if form.is_valid():
             item = form.save(commit = False)
             item.menu = my_menu
+            item.tagname = item.name.replace(" ", "")
             item.save()
             form = MenuItemForm()
 
@@ -82,13 +84,27 @@ def MenuView(request, pk):
 
 def CustomerMenuView(request, pk):
     menuitem = list()
+    print ('alancustview')
     items = MenuItem.objects.all()
     for i in items:
         if i.menu.id is int(pk):
             menuitem.append(i)
+    if request.method == 'POST':
+        print('PostView')
+        form = request.POST
+        print (form)
+        print('after form =')
+        taggeditems = list()
+        for a in form:
+            taggeditems.append(a)
+        print(len(taggeditems))
+        for i in taggeditems:
+            print(i)
 
-    form = OrderForm()
-    return render(request, 'customer_menu.html', {'menu': menuitem,'form':form})
+        return render(request, 'customer_menu.html', {'menu': menuitem})
+    else:
+        print('before  render')
+    return render(request, 'customer_menu.html', {'menu': menuitem})
 
 
 def login(request):
