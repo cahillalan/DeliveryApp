@@ -34,6 +34,10 @@ urlpatterns = [
     url(r'^settings/account/customer$', accounts_views.CustomerUpdateView.as_view(template_name='customer_account.html'),name='customer_account'),
     url(r'^settings/account/driver$', accounts_views.DriverUpdateView.as_view(template_name='driver_account.html'),name='driver_account'),
     url(r'^customer_menu/(?P<pk>\d+)/$', appitems_views.CustomerMenuView, name='customer_menu'),
+    url(r'^order_confirmation/(?P<pk>\d+)$', appitems_views.OrderConfirmationView, name='order_confirmation'),
+    url(r'^address_change/(?P<pk>\d+)$', appitems_views.AddressChangeView, name='address_change'),
+    url(r'^card_change/(?P<pk>\d+)$', appitems_views.CardChangeView, name='card_change'),
+
     url(r'^settings/account/customer/carddetails$',accounts_views.CardDetailsView.as_view(template_name='card_details.html'), name='card_details'),
 
     ## added restaurant_account url

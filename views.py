@@ -1,128 +1,96 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from accounts.models import Customer,Restaurant,Driver
-from appitems.models import MenuItem
-from appitems.otherModel import Menu
-from django.views.generic import UpdateView, ListView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import resolve, reverse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import AbstractUser
-from django.http import Http404
-from appitems.forms import MenuItemForm,OrderForm
+from django.views.generic import CreateView
+from django.contrib.auth import login as auth_login
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from deliveryapp.decorators import user_is_restaurant,user_is_customer,user_is_driver
-from django import forms
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+from appitems.otherModel import CardDetails
 
 
+from .forms import CustomerSignUpForm,RestaurantSignUpForm,DriverSignUpForm
+from .models import User
+from django.http import HttpResponse
+from .models import Customer,Restaurant
 
 
-def home(request):
-    restaurants = Restaurant.objects.all()
-    customers = Customer.objects.all()
-    drivers = Driver.objects.all()
-    rest_names = list()
-    menu = Menu.objects.all()
-    menu_list= list()
-
-    for men in menu:
-        menu_list.append(men.restaurant)
-
-    for rest in restaurants:
-        rest_names.append(rest.user.username)
-
-    rest_names.append("end")
-    for rest in customers:
-        rest_names.append(rest.user.username)
-
-    rest_names.append("end")
-
-    for rest in drivers:
-        rest_names.append(rest.user.username)
-
-    response_html = '<br>'.join(rest_names)
-
-    return HttpResponse(response_html)
-
-
-##changed menulistview to definition view in order to use the decorators
-@login_required
-@user_is_customer
-def MenuListView(request):
-    restaurants = Restaurant.objects.all()
-    return render(request, 'home.html', {'restaurants': restaurants})
-
-def MenuView(request, pk):
-    menuitem = list()
-    items = MenuItem.objects.all()
-    for i in items:
-        if i.menu.id is int(pk):
-            menuitem.append(i)
-
-    my_menu = get_object_or_404(Menu, pk=pk)
+def customer_signup(request):
     if request.method == 'POST':
-        form = MenuItemForm(request.POST)
+        form = CustomerSignUpForm(request.POST)
         if form.is_valid():
-            item = form.save(commit = False)
-            item.menu = my_menu
-            item.tagname = item.name.replace(" ", "")
-            item.save()
-            form = MenuItemForm()
-
-            menuitem = list()
-            items = MenuItem.objects.all()
-            for i in items:
-                if i.menu.id is int(pk):
-                    menuitem.append(i)
-        return render(request, 'menu.html', {'menu': menuitem,'form': form})
+            customer = form.save()
+            auth_login(request, customer)
+            return redirect('home')
     else:
-        form = MenuItemForm()
-    return render(request, 'menu.html', {'menu': menuitem,'form': form})
+        form = CustomerSignUpForm()
+    return render(request, 'customer_signup.html', {'form': form})
 
-
-def CustomerMenuView(request, pk):
-    menuitem = list()
-    print ('alancustview')
-    items = MenuItem.objects.all()
-    for i in items:
-        if i.menu.id is int(pk):
-            menuitem.append(i)
+def restaurant_signup(request):
     if request.method == 'POST':
-        print('PostView')
-        form = request.POST
-        print (form)
-        print('after form =')
-        taggeditems = list()
-        for a in form:
-            taggeditems.append(a)
-        print(len(taggeditems))
-        for i in taggeditems:
-            print(i)
-
-        return render(request, 'customer_menu.html', {'menu': menuitem})
-    else:
-        print('before  render')
-    return render(request, 'customer_menu.html', {'menu': menuitem})
-
-
-def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = RestaurantSignUpForm(request.POST)
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                auth_login(request, user)
-                return redirect('home')
-            else:
-                form = LoginForm()
-                return render(request, 'login.html', {'form': form})
-
+            restaurant = form.save()
+            auth_login(request, restaurant)
+            return redirect('home')
     else:
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        form = RestaurantSignUpForm()
+    return render(request, 'restaurant_signup.html', {'form': form})
 
+def driver_signup(request):
+    if request.method == 'POST':
+        form = DriverSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = DriverSignUpForm()
+    return render(request, 'driver_signup.html', {'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class RestaurantUpdateView(UpdateView):
+    model = User
+    fields = ('username','first_name' )
+    template_name= 'restaurant_account.html'
+    success_url = reverse_lazy('restaurant_account')
+
+    def get_object(self):
+        return self.request.user
+## added in the updatviews below
+
+@method_decorator(login_required, name='dispatch')
+class CustomerUpdateView(UpdateView):
+    model = User
+    fields = ('username','first_name' )
+    template_name= 'customer_account.html'
+    success_url = reverse_lazy('customer_account')
+
+    def get_object(self):
+        return self.request.user
+
+@method_decorator(login_required, name='dispatch')
+class DriverUpdateView(UpdateView):
+    model = User
+    fields = ('username','first_name' )
+    template_name= 'driver_account.html'
+    success_url = reverse_lazy('driver_account')
+
+    def get_object(self):
+        return self.request.user
+
+@method_decorator(login_required, name='dispatch')
+class CardDetailsView(UpdateView):
+    model = CardDetails
+    fields = ('cardNumber','securityNumber','cardHolderName','expiryDate','pinNumber' )
+    template_name= 'card_details.html'
+    success_url = reverse_lazy('card_details')
+
+    def get_object(self):
+        instance = self.request.user
+        cust = Customer.objects.get(user = instance)
+        card = cust.cardDetails
+        return card

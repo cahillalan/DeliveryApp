@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block maincontent %}
+THIS WILL BE A GOOGLE MAPS PAGE
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <form method="post" novalidate>
+        {% csrf_token %}
+	<input type="Number" name="cardNumber" value = "{{card.cardNumber}}"/>
+	<input type="Number" name="securityNumber" value = "{{card.securityNumber}}"/>
+	<input type="Text" name="CardHolderName" value = "{{card.cardHolderName}}"/>
+	<input type="Number" name="pinNumber" value = "{{card.pinNumber}}"/>
+	{{card.expiryDate}}
+
+
+		
+		
+        <button type="submit" class="btn btn-success">Save changes</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
