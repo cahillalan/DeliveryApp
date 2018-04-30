@@ -6,7 +6,6 @@ class Menu(models.Model):
     views = models.PositiveIntegerField(default=0)
 
 
-
 class CardDetails(models.Model):
     cardNumber = models.DecimalField(max_digits = 10,decimal_places = 0, null = True)
     securityNumber = models.DecimalField(max_digits = 3,decimal_places = 0,null = True)

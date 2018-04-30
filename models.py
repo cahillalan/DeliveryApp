@@ -12,11 +12,15 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name = 'cust')
     address = models.CharField(max_length=255)
     cardDetails = models.ForeignKey(CardDetails , on_delete = models.CASCADE, related_name = 'card_details')
+    firstname = models.CharField(max_length = 255)
+    lastname = models.CharField(max_length = 255)
+
 
 class Restaurant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     address = models.CharField(max_length=255)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu')
+    name = models.CharField(max_length = 255)
 
 
 class Driver(models.Model):

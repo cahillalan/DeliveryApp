@@ -7,6 +7,7 @@
       <tr>
         <th>MenuItem</th>
         <th>Cost</th>
+		<th>Amount</th>
         <th>Description</th>
       </tr>
     </thead>
@@ -25,8 +26,12 @@
 		 
         </tr>
       {% endfor %}
+	  
+	  <td><br><br>
+	  Total Cost:</td><td><br><br>{{order.cost}}</td>
     </tbody>
   </table>
+  
 {% endblock %}
 {% block mainbody %}
   <div class="container">

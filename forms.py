@@ -35,7 +35,7 @@ class RestaurantSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_restaurant = True
         user.save()
-        rest = Restaurant.objects.create(user=user, menu = Menu.objects.create(id = user.id))
+        rest = Restaurant.objects.create(user=user, menu = Menu.objects.create(id = user.id, views = 0))
         rest.save()
 
         return user

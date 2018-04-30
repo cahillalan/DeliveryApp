@@ -29,14 +29,23 @@ urlpatterns = [
     url(r'^menulist/$', appitems_views.MenuListView, name='menu_view'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    url(r'^menu/(?P<pk>\d+)/$', appitems_views.MenuView, name='restaurant_menu'),
+    url(r'^settings/account/restaurant/menu/(?P<pk>\d+)/$', appitems_views.MenuView, name='restaurant_menu'),
     url(r'^settings/account/restaurant$', accounts_views.RestaurantUpdateView.as_view(template_name='restaurant_account.html'), name='restaurant_account'),
+    url(r'^settings/account/restaurant/statistics$', appitems_views.RestaurantStatisticsView, name='restaurant_statistics'),
+    url(r'^settings/account/restaurant/address$', appitems_views.RestaurantAddressView, name='restaurant_address'),
+    url(r'^settings/account/restaurant/menudelete/(?P<pk>\d+)/$', appitems_views.RestaurantDeleteMenuView,name='restaurant_menu_delete'),
+    url(r'^settings/account/restaurant/menu/(?P<pk>\d+)/itemedit/(?P<pka>\d+)$', appitems_views.RestaurantEditItemView, name='restaurant_item_edit'),
     url(r'^settings/account/customer$', accounts_views.CustomerUpdateView.as_view(template_name='customer_account.html'),name='customer_account'),
+    url(r'^settings/account/customer/address$',appitems_views.CustomerAddressView, name='customer_address'),
+    url(r'^settings/account/customer/statistics$', appitems_views.CustomerStatisticsView, name='customer_statistics'),
+
+
     url(r'^settings/account/driver$', accounts_views.DriverUpdateView.as_view(template_name='driver_account.html'),name='driver_account'),
     url(r'^customer_menu/(?P<pk>\d+)/$', appitems_views.CustomerMenuView, name='customer_menu'),
     url(r'^order_confirmation/(?P<pk>\d+)$', appitems_views.OrderConfirmationView, name='order_confirmation'),
     url(r'^address_change/(?P<pk>\d+)$', appitems_views.AddressChangeView, name='address_change'),
     url(r'^card_change/(?P<pk>\d+)$', appitems_views.CardChangeView, name='card_change'),
+    url(r'^order_dispatch/(?P<pk>\d+)$', appitems_views.OrderDispatchView, name='order_dispatch_info'),
 
     url(r'^settings/account/customer/carddetails$',accounts_views.CardDetailsView.as_view(template_name='card_details.html'), name='card_details'),
 

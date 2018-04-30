@@ -7,18 +7,13 @@
 {% block mainbody %}
   <div class="container">
     <h2>My Account </h2>
+	{{self.instance.name}}
     <form method="post" novalidate>
       {% csrf_token %}
       {{ form.as_p }} 
-	  <a href="{% url 'restaurant_menu' user.id %}">Menu Edit</a>
-	  <a href="{% url 'restaurant_address' %}">Address Update</a>
-	  <a href="{% url 'restaurant_statistics' %}">Statistics</a>
-
-
-	  
 	  <br></br>
 	  
-      <button type="submit" class="btn btn-primary">Update Account</button>
+      <button type="submit" class="btn btn-primary">Update Item</button>
 	  
 	  
     </form>

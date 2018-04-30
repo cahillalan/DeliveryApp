@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+<h1>
+</h1>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+	  
+        <th>Total Orders Made</th>
+		<th>Favorite Item</th>
+		<th>Favorite Restaurant</th>
+		<th>Total Items Bought</th>
+		
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+         <td>
+            {{ count }}
+          </td>
+		  <td>
+            {{ favitem.name }}
+          </td>
+		  <td>
+            {{ favrest.user.username }}
+          </td>
+		  <td>
+            {{ itemcount }}
+          </td>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

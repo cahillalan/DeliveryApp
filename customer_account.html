@@ -11,6 +11,10 @@
       {% csrf_token %}
       {{ form.as_p }} 
 	  <a href="{% url 'card_details' %}">Payment Details</a>
+	  <a href="{% url 'customer_address' %}">Address Update</a>
+	  <a href="{% url 'customer_statistics' %}">Statistics</a>
+
+
 
 	  
 	  <br></br>
