@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+<h1>
+</h1>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+	  <th>Item</th>
+	  <th>Price</th>
+	  <th>Savings</th>
+        <th>Menu</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+        <tr>
+          <td>
+            {{ item.name }}
+          </td>
+		   <td>
+            {{ item.price }}
+          </td>
+		   <td>
+            {{ item.savings }}
+          </td>
+		  <td>
+            <a href="{% url 'customer_menu' item.menu.id %}">{{ item.menu.restaurant }}menu </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

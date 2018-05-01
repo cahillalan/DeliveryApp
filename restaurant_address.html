@@ -146,12 +146,33 @@
           center: {lat: 52.8365, lng: -6.9341},
           zoom: 11
         });
+		var data = {
+			bounds: {
+				west: -6.981831999999999994,
+			  east: -6.84460999999999,
+			  south: 52.82052,
+			  north: 52.865709
+			}
+		  };
+		var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(data.bounds.south, data.bounds.west), new google.maps.LatLng(data.bounds.north, data.bounds.east));
+		var rectangle = new google.maps.Rectangle({
+		map: map,
+		bounds: bounds
+												 });
+		 map.fitBounds(bounds);
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
 
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
+		var options = {
+            bounds:defaultBounds,};
+			var defaultBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(52.82052, -6.981831999994),
+            new google.maps.LatLng(52.865709, -6.84460999999)
+			);
+		
+        var autocomplete = new google.maps.places.Autocomplete(input,defaultBounds);
 
         // Set initial restrict to the greater list of countries.
         autocomplete.setComponentRestrictions(
