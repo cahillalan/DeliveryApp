@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="6"
+    android:useDefaultMargins="true" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_column="2"
+        android:layout_row="1"
+        android:text="Load A Delivery" />
+
+</GridLayout>
