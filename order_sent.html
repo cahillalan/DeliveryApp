@@ -3,7 +3,10 @@
 
 {% block maincontent %}
 <h1>
-Thank You Your Order Has Been Dispatched And Will Arrive In 30 Minutes
+Thank You!<br>
+Your Order Has Been Dispatched And Will Arrive In 30 Minutes!!<br>
+Your Drivers Name is: {{order.driver.username}}<br>
+Please Enjoy!!
 </h1>
  	  <a href="{% url 'menu_view' %}">MenuListPage</a><br>
 	  

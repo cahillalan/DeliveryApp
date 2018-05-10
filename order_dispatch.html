@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
 {% block maincontent %}
-
+<h2>
+Your Orders Details
+</h2>
   <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <form method="post" novalidate>
 	  	{% csrf_token %}
-		         my address   {{ addresses.0 }}  
+		         My Address:   {{ addresses.0 }}  
 					<br>
-		          restaurant address  {{ addresses.1 }}      
-<br>
-					restaurant name = {{order.restaurant.user.username}}
+		          Restaurant Address  {{ addresses.1 }} 
+<br>				Customer Name = {{order.customer.firstname}} {{order.customer.lastname}}<br>
+					Restaurant Name = {{order.restaurant.user.username}}
 					<br>
 					{% for i in items %}
 					{{i.item.name}} 
-					{{i.item.price}}<br>
+					€{{i.item.price}}<br>
 					{%endfor%}
-					
+					Delivery:	 € 5.00<br>
+					Order Total: € {{order.cost}}<br>
 					
 
 
 
 		
 		
-        <button type="submit" class="btn btn-success">Save changes</button>
+        <button type="submit" class="btn btn-success">Complete Purchase</button>
       </form>
     </div>
   </div>

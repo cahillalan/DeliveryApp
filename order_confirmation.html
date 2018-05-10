@@ -18,7 +18,7 @@
             {{ i.item.name }}            
           </td>
           <td>
-            {{ i.item.price }} 			
+            €{{ i.item.price }} 			
           </td>
 		   <td>
             {{ i.amount }} 			
@@ -26,9 +26,10 @@
 		 
         </tr>
       {% endfor %}
-	  
+	 
 	  <td><br><br>
-	  Total Cost:</td><td><br><br>{{order.cost}}</td>
+	  Delivery Cost: € 5 <br>
+	  Total Cost:€{{order.cost}}</td>
     </tbody>
   </table>
   

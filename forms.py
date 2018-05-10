@@ -1,30 +1,56 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from appitems.models import MenuItem
-from django.contrib.auth.models import User
-from accounts.models import Customer,Restaurant,Driver
-from appitems.otherModel import Menu
+from django.db import transaction
+from appitems.otherModel import Menu,CardDetails
+from django.forms import ModelForm
+from django.shortcuts import get_object_or_404, redirect, render_to_response
 
+from accounts.models import Customer, User, Restaurant,Driver
 
-
-class SignInForm(UserCreationForm):
+class CustomerSignUpForm(UserCreationForm):
+    address = forms.CharField(max_length=254, required=True)
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username','password1')
+        fields = ('username', 'email', 'password1', 'password2')
 
-class MenuItemForm(forms.ModelForm):
-    name = forms.CharField(max_length=255, required=True)
-    price = forms.DecimalField(required=True, decimal_places=2)
+    @transaction.atomic
+    def save(self):
+        user = super().save()
+        user.is_customer = True
+        user.save()
+        customer = Customer.objects.create(user=user,cardDetails = CardDetails.objects.create(id = user.id))
+        customer.save()
+
+        return user
+
+class RestaurantSignUpForm(UserCreationForm):
+
     class Meta(UserCreationForm.Meta):
-        model = MenuItem
-        fields = ('name', 'price')
+        model = User
+        fields = ('username', 'password1', 'password2')
 
-class ItemEditForm(forms.ModelForm):
-    onoffer = forms.BooleanField()
-    price = forms.DecimalField(required=True, decimal_places=2)
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.is_restaurant = True
+        user.save()
+        rest = Restaurant.objects.create(user=user, menu = Menu.objects.create(id = user.id, views = 0))
+        rest.save()
 
-    class Meta:
-        model = MenuItem
-        fields =('onoffer','price')
+        return user
+
+class DriverSignUpForm(UserCreationForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.is_driver = True
+        user.save()
+        driver = Driver.objects.create(user=user)
+        driver.save()
+        return user
 
 
