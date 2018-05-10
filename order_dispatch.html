@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block maincontent %}
 
-
-THIS WILL BE A GOOGLE MAPS PAGE
   <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <form method="post" novalidate>
-        {% csrf_token %}
-	<input type="Text" name="distance"/><br>
+		         my address   {{ addresses.0 }}  
+					<br>
+		          restaurant address  {{ addresses.1 }}      
+<br>
+					restaurant name = {{order.restaurant.user.username}}
+					<br>
+					{% for i in items %}
+					{{i.item.name}} 
+					{{i.item.price}}<br>
+					{%endfor%}
+					
+					
 
-	<input type="Text" name="duration" />
-	{{card.expiryDate}}
 
 
 		

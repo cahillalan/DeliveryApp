@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^settings/account/restaurant/menu/(?P<pk>\d+)/$', appitems_views.MenuView, name='restaurant_menu'),
     url(r'^settings/account/restaurant$', accounts_views.RestaurantUpdateView.as_view(template_name='restaurant_account.html'), name='restaurant_account'),
+    url(r'^settings/account/restaurant/extended$',accounts_views.ExtendedRestaurantUpdateView.as_view(template_name='extended_restaurant_account.html'),name='extended_restaurant_account'),
     url(r'^settings/account/restaurant/statistics$', appitems_views.RestaurantStatisticsView, name='restaurant_statistics'),
     url(r'^settings/account/restaurant/address$', appitems_views.RestaurantAddressView, name='restaurant_address'),
     url(r'^settings/account/restaurant/menudelete/(?P<pk>\d+)/$', appitems_views.RestaurantDeleteMenuView,name='restaurant_menu_delete'),
@@ -40,7 +41,7 @@ urlpatterns = [
     url(r'^settings/account/customer$', accounts_views.CustomerUpdateView.as_view(template_name='customer_account.html'),name='customer_account'),
     url(r'^settings/account/customer/address$',appitems_views.CustomerAddressView, name='customer_address'),
     url(r'^settings/account/customer/statistics$', appitems_views.CustomerStatisticsView, name='customer_statistics'),
-
+    url(r'^settings/account/customer/itemchart$', appitems_views.ItemChartView, name='item_chart'),
 
     url(r'^settings/account/driver$', accounts_views.DriverUpdateView.as_view(template_name='driver_account.html'),name='driver_account'),
     url(r'^customer_menu/(?P<pk>\d+)/$', appitems_views.CustomerMenuView, name='customer_menu'),

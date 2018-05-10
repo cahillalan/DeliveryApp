@@ -20,7 +20,7 @@
           </td>
 		  <td class="align-middle">{{ rest.username }}</td>
 		  <td>
-            <a href="{% url 'customer_menu' rest.user.id %}">{{ rest.user.first_name }}</a>
+            <a href="{% url 'customer_menu' rest.user.id %}">{{ rest.user.username }}</a>
           </td>
         </tr>
       {% endfor %}
