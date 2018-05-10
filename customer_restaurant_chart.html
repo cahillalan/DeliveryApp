@@ -10,15 +10,15 @@
           type: 'column'
       },
       title: {
-          text: 'Amount of Each Item Bought'
+          text: 'Restaurants Used'
       },
       xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.name }}' {% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}'{{ entry.restaurantName }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
           ]
       },
       series: [{
-          name: 'Bought',
+          name: 'Times Each Restaurant Used',
           data: [
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],

@@ -4,39 +4,10 @@
 {% block maincontent %}
 <h1>
 </h1>
-  <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-		<th>Total Views</th>
-        <th>Total Orders</th>        
-		<th>Percentage Of Views Turned To Sales</th>
-		<th>Most Sold Item</th>
-		<th>Best Customer</th>
-		<th>Total Items Sold</th>
-		
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-		<td>
-            {{ views }}
-          </td>
-         <td>
-            {{ count }}
-          </td>
-		  <td>
-            {{ percent }}%
-          </td>
-		  <td>
-            {{ favitem.name }}
-          </td>
-		  <td>
-            {{ favcust.user.username }}
-          </td>
-		  <td>
-            {{ itemcount }}
-          </td>
-        </tr>
-    </tbody>
-  </table>
+ 	  <a href="{% url 'restaurant_item_chart' %}">ItemsSold</a><br>
+	  <a href="{% url 'restaurant_customer_chart' %}">Customers Served</a><br>
+	  <a href="{% url 'restaurant_order_chart' %}">Total Orders</a><br>
+	  <a href="{% url 'restaurant_spent_chart' %}">Spent By Each Customer</a><br>
+
+
 {% endblock %}

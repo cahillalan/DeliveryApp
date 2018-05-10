@@ -10,7 +10,7 @@
           type: 'column'
       },
       title: {
-          text: 'Amount of Each Item Bought'
+          text: 'Amount of Each Item Sold'
       },
       xAxis: {
           categories: [
@@ -18,7 +18,7 @@
           ]
       },
       series: [{
-          name: 'Bought',
+          name: 'Sold',
           data: [
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],

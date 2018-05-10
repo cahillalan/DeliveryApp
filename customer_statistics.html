@@ -4,32 +4,10 @@
 {% block maincontent %}
 <h1>
 </h1>
-  <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-	  
-        <th>Total Orders Made</th>
-		<th>Favorite Item</th>
-		<th>Favorite Restaurant</th>
-		<th>Total Items Bought</th>
-		
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-         <td>
-            {{ count }}
-          </td>
-		  <td>
-            {{ favitem.name }}
-          </td>
-		  <td>
-            {{ favrest.user.username }}
-          </td>
-		  <td>
-            {{ itemcount }}
-          </td>
-        </tr>
-    </tbody>
-  </table>
+ 	  <a href="{% url 'customer_item_chart' %}">ItemsBought</a><br>
+	  <a href="{% url 'customer_restaurant_chart' %}">Restaurants Used</a><br>
+	  <a href="{% url 'customer_order_chart' %}">Total Orders</a><br>
+	  <a href="{% url 'customer_spent_chart' %}">Spent In Each Restaurant</a><br>
+
+
 {% endblock %}
