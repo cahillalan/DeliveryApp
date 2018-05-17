@@ -1,28 +1,62 @@
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
     <title>{% block title %}Delivery Application{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/mylayout.css' %}">
+    <meta charset="utf-8">
+	
+	
   </head>
   <body>
   <h1>
-  <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
-    {% if user.is_restaurant %}
-    <a href="{% url 'restaurant_account' %}" class="btn btn-outline-secondary">My Account</a>
-	{% elif user.is_customer %}
-	<a href="{% url 'customer_account' %}" class="btn btn-outline-secondary">My Account</a>
-	{% else %}
-	<a href="{% url 'driver_account' %}" class="btn btn-outline-secondary">My Account</a>
-	{% endif %}
-	<a href="{% url 'logout' %}" class="btn btn-outline-secondary">Logout</a>
-	
-
+  Delivery Application
   </h1>
     <div class="container">
       
         {% block firstb %}
-        {% endblock %}
+		<body>
+		<ul>
+  <li><a href="/">Home</a></li>
+  {% if user.is_authenticated %}
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+  <li><a href="{% url 'login' %}">Login</a></li>
+  <li><a href="{% url 'customer_signup' %}">Customer SignUp</a></li>
+  <li><a href="{% url 'restaurant_signup' %}">Restaurant SignUp</a></li>
+  <li><a href="{% url 'driver_signup' %}">Driver SignUp</a></li>
+  {%endif%}
+  {% if user.is_authenticated %}
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">{{user.username}}</a>
+    <div class="dropdown-content">
+       {% if user.is_restaurant %}
+    <a href="{% url 'restaurant_account' %}" class="btn btn-outline-secondary">My Account</a>
+	<a href="{% url 'restaurant_delivery_view'%}">View Order History</a><br>
+	<a href="{% url 'restaurant_statistics' %}">Statistics</a>
+
+
+	{% elif user.is_customer %}
+	<a href="{% url 'customer_account' %}" class="btn btn-outline-secondary">My Account</a>
+	<a href="{% url 'customer_order_view'%}">View Order History</a><br>
+	<a href="{% url 'customer_statistics' %}">Statistics</a>
+
+
+	{% elif user.is_driver %}
+	<a href="{% url 'driver_account' %}" class="btn btn-outline-secondary">My Account</a>
+	<a href="{% url 'driver_delivery_view'%}">View Order History</a><br>
+	<a href="{% url 'driver_statistics' %}">Statistics</a>
+
+
+	{% endif %}
+    </div>
+  </li>
+  {%endif%}
+</ul>
+	</body>	
 		
+        {% endblock %}
+		    
       {% block maincontent %}
       {% endblock %}
 	  

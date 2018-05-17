@@ -15,10 +15,11 @@ Your Orders Details
 					<br>
 					{% for i in items %}
 					{{i.item.name}} 
-					€{{i.item.price}}<br>
+					€{{i.item.price}} x {{i.amount}}<br>
 					{%endfor%}
+					Order Cost : €{{order.cost}}<br>
 					Delivery:	 € 5.00<br>
-					Order Total: € {{order.cost}}<br>
+					Order Total: € {{order.totalCost}}<br>
 					
 
 

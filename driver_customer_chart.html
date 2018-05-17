@@ -23,6 +23,13 @@
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],
           color: 'green'
+      },
+	  {
+          name: 'Total Orders Amount',
+          data: [
+            {% for entry in dataset %}{{ entry.amount }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'red'
       }]
   });
 </script>

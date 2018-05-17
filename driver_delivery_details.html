@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Delivery Details</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+        Customer Name:		{{ delivery.customer.user.username}}<br>
+         Restaurant Name:	{{ delivery.restaurant.user.username}}<br>
+		 {% for item in items %}
+        
+							{{ item.name}}, amount: {{ item.amount}} cost: €{{ item.item.price}}<br>
+							
+		{% endfor %}
+         Cost:				{{ delivery.totalCost}}<br>
+         Pickup Time: 		{{ delivery.pickeduptime}}<br>
+		 Delivery Tim:		{{ delivery.deliverytime}}<br>
+         Delivery Time:		{{ delivery.customer.user.username}}<br>
+		 Time Taken:		{{ delivery.hours}}hrs {{delivery.minutes}}mins {{delivery.seconds}} seconds <br>
+         Tip:				{{ delivery.tip}}<br>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

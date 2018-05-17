@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+
 {% block maincontent %}
 
  <div id="container"></div>
@@ -10,20 +12,21 @@
           type: 'column'
       },
       title: {
-          text: 'Customers Served'
+          text: 'Rating for each Delivery'
       },
       xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.customername }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}'{{ entry.id }}' {% if not forloop.last %}, {% endif %}{% endfor %}
           ]
       },
       series: [{
-          name: 'Times Each Customer Served',
+          name: 'Rating',
           data: [
-            {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}{{ entry.rating }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],
           color: 'green'
       }]
   });
 </script>
+Your Average Rating is: {{average}}
 {% endblock %}

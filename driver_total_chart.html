@@ -10,20 +10,21 @@
           type: 'column'
       },
       title: {
-          text: 'Customers Served'
+          text: 'Total Orders'
       },
       xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.customername }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}'{{ entry.restaurantName }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
           ]
       },
       series: [{
-          name: 'Times Each Customer Served',
+          name: 'Orders',
           data: [
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],
           color: 'green'
-      }]
+      },]
   });
 </script>
+
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+<h1>
+</h1>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Orders for Delivery</th>
+      </tr>
+    </thead>
+    <tbody>
+   
+        <tr>
+          <td>
+            {{ delivery.customer.user.username}}
+			
+            
+          </td>
+		  <td class="align-middle">{{ delivery.restaurant.username }}</td>
+		  <td>
+                   <a href="{% url 'delivery_details_view' delivery.id %}">Details</a>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

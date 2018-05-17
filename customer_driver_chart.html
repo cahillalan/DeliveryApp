@@ -10,15 +10,15 @@
           type: 'column'
       },
       title: {
-          text: 'Customers Served'
+          text: 'Drivers Used'
       },
       xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.customername }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}'{{ entry.drivername }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
           ]
       },
       series: [{
-          name: 'Times Each Customer Served',
+          name: 'Times Each Driver Delivered',
           data: [
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],
@@ -26,4 +26,8 @@
       }]
   });
 </script>
+{% for item in mylist %}{{ item.name}}{%endfor%}
+
+{% for a in amount %}{{ a}}{%endfor%}
+
 {% endblock %}

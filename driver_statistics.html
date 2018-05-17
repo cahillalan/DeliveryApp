@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+<h1>
+</h1>
+ 	  <a href="{% url 'driver_item_chart' %}">ItemsDelivered</a><br>
+	  <a href="{% url 'driver_customer_chart' %}">Customers Served</a><br>
+	  <a href="{% url 'driver_order_chart' %}">Total Orders</a><br>
+	  <a href="{% url 'driver_restaurant_chart' %}">Restaurants Delivered For</a><br>
+	  <a href="{% url 'driver_timetip_chart' %}">Time Tip Chart</a><br>
+	  <a href="{% url 'driver_rating_chart' %}">Rating Chart</a><br>
+
+
+
+{% endblock %}

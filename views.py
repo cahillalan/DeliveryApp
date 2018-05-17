@@ -15,7 +15,7 @@ from django.db import models
 from .forms import CustomerSignUpForm,RestaurantSignUpForm,DriverSignUpForm
 from .models import User
 from django.http import HttpResponse
-from .models import Customer,Restaurant
+from .models import Customer,Restaurant,Driver
 
 
 def customer_signup(request):
@@ -67,7 +67,7 @@ class RestaurantUpdateView(UpdateView):
 @method_decorator(login_required, name='dispatch')
 class ExtendedRestaurantUpdateView(UpdateView):
     model = Restaurant
-    fields = ('name', 'contactnumber','managersName')
+    fields = ('name', 'contactnumber','managersName','typeoffood')
     template_name = 'extended_restaurant_account.html'
     success_url = reverse_lazy('extended_restaurant_account')
 
@@ -85,6 +85,18 @@ class CustomerUpdateView(UpdateView):
     def get_object(self):
         return self.request.user
 
+
+@method_decorator(login_required, name='dispatch')
+class ExtendedCustomerUpdateView(UpdateView):
+    model = Customer
+    fields = ('firstname','lastname','contactnumber' )
+    template_name= 'extended_customer_account.html'
+    success_url = reverse_lazy('extended_customer_account')
+
+    def get_object(self):
+        cust = Customer.objects.get(user=self.request.user)
+        return cust
+
 @method_decorator(login_required, name='dispatch')
 class DriverUpdateView(UpdateView):
     model = User
@@ -94,6 +106,17 @@ class DriverUpdateView(UpdateView):
 
     def get_object(self):
         return self.request.user
+
+@method_decorator(login_required, name='dispatch')
+class ExtendedDriverUpdateView(UpdateView):
+    model = Driver
+    fields = ('vehiclereg','typeofvehicle','contactnumber' )
+    template_name= 'extended_driver_account.html'
+    success_url = reverse_lazy('driver_account')
+
+    def get_object(self):
+        driver = Driver.objects.get(user = self.request.user)
+        return driver
 
 @method_decorator(login_required, name='dispatch')
 class CardDetailsView(UpdateView):

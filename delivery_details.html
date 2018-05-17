@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Delivery Details</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+		   <td>
+         Customer Name:		{{ delivery.customer.user.username}}<br>
+         Restaurant Name:	{{ delivery.restaurant.user.username}}<br>
+         Cost:				{{ delivery.totalCost}}<br>
+         Pickup Time: 		{{ delivery.pickeduptime}}<br>
+		 Delivery Time:		{{ delivery.deliverytime}}<br>
+         <br><br><br><br>
+		  {% if not delivery.pickedup %}
+		
+		  
+		   <form  method="POST">
+		   {% csrf_token %}
+		   <br>
+        <button type="submit" name ="pickedup" value ="pickedup" class="btn btn-primary">Delivery Picked Up</button>
+			
+			</form>
+          
+		 {%else%}
+		   <form  method="POST">
+		   {% csrf_token %}
+		Tip:<input type="number" min = "0" style="width: 4em"  name="tip"  value = "0"  /><br>
+
+        <button type="submit" name ="delivered" value = "delivered" class="btn btn-primary">Delivered</button>
+			</form>
+          		     {%endif%}                
+		  <br>
+				<a href="{% url 'delivery_addresses_view' delivery.id%}">Addresses</a>
+		</td>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

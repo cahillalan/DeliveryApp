@@ -3,27 +3,15 @@
 
 {% block maincontent %}
 <h1>
+Home Page
 </h1>
-  <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Restaurant Menus</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for rest in restaurants %}
-        <tr>
-          <td>
-            {{ rest.user.username }}
-			
-            
-          </td>
-		  <td class="align-middle">{{ rest.username }}</td>
-		  <td>
-            <a href="{% url 'customer_menu' rest.user.id %}">{{ rest.user.username }}</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% if user.is_customer %}
+  <a href="{% url 'menu_view' %}">List Of Menus</a>
+  <br><br><br>
+  <a href="{% url 'offers_view' %}">List Of Offers</a>
+  {%elif user.is_driver%}
+  <br>
+    <a href="{% url 'delivery_view' %}">List Of Deliverys</a>
+
+	{%endif%}
 {% endblock %}

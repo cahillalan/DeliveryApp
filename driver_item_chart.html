@@ -10,15 +10,15 @@
           type: 'column'
       },
       title: {
-          text: 'Customers Served'
+          text: 'Amount of Each Item Delivered'
       },
       xAxis: {
           categories: [
-            {% for entry in dataset %}'{{ entry.customername }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+            {% for entry in dataset %}'{{ entry.name }}' {% if not forloop.last %}, {% endif %}{% endfor %}
           ]
       },
       series: [{
-          name: 'Times Each Customer Served',
+          name: 'Sold',
           data: [
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],

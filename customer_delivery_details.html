@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Delivery Details</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+         Driver Name:		{{ delivery.driver.user.username}}<br>
+         Restaurant Name:	{{ delivery.restaurant.user.username}}<br>
+		 {% for item in items %}
+        
+							{{ item.name}}, amount: {{ item.amount}} cost: €{{ item.item.price}}<br>
+							
+		{% endfor %}
+         Cost:				{{ delivery.totalCost}}<br>
+         Pickup Time: 		{{ delivery.pickeduptime}}<br>
+		 Delivery Tim:		{{ delivery.deliverytime}}<br>
+         Delivery Time:		{{ delivery.customer.user.username}}<br>
+		 Time Taken:		{{ delivery.hours}}hrs {{delivery.minutes}}mins {{delivery.seconds}} seconds <br>
+         Tip:				{{ delivery.tip}}<br><br><br>
+		 {% if not delivery.driverrating %}
+		
+		  
+		   <form  method="POST">
+		   {% csrf_token %}
+		   Driver Rating:<input type="number" min = "0" max = "5" style="width: 4em"  name="drating"  value = "0"  /><br>
+        <button type="submit" name ="driver" value ="driver" class="btn btn-primary">Set Driver Rating</button>
+			
+			</form>
+         {%endif%}
+		 {% if not delivery.restaurantrating %}
+		
+		  
+		   <form  method="POST">
+		   {% csrf_token %}
+		   Restaurant Rating:<input type="number" min = "0" max = "5" style="width: 4em"  name="rating"  value = "0"  /><br>
+        <button type="submit" name ="restaurant" value ="raestaurant" class="btn btn-primary">Set Restaurant Rating</button>
+			
+			</form>
+         {%endif%}
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

@@ -28,15 +28,16 @@
       {% endfor %}
 	 
 	  <td><br><br>
+	  Order Cost : €{{order.cost}}<br>
 	  Delivery Cost: € 5 <br>
-	  Total Cost:€{{order.cost}}</td>
+	  Total Cost:€{{order.totalCost}}</td>
     </tbody>
   </table>
   
 {% endblock %}
 {% block mainbody %}
   <div class="container">
-    <h2>OrderView </h2>
+  
     <form method="post" novalidate>
 	{% csrf_token %}
 	  

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block maincontent %}
+
+ <div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+<script>
+  Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Time and Tip for each Order'
+      },
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.id }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Time in minutes',
+          data: [
+            {% for entry in dataset %}{{ entry.time }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+      },
+	  {
+          name: 'Tip €',
+          data: [
+            {% for entry in dataset %}{{ entry.tip }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+      }]
+  });
+</script>
+{% for item in mylist %}{{ item.name}}{%endfor%}
+
+{% for a in amount %}{{ a}}{%endfor%}
+
+{% endblock %}

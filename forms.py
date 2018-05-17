@@ -8,7 +8,6 @@ from django.shortcuts import get_object_or_404, redirect, render_to_response
 from accounts.models import Customer, User, Restaurant,Driver
 
 class CustomerSignUpForm(UserCreationForm):
-    address = forms.CharField(max_length=254, required=True)
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email', 'password1', 'password2')

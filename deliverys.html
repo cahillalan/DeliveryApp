@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block maincontent %}
+<h1>
+</h1>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Orders for Delivery</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for delivery in deliverys %}
+        <tr>
+          <td>
+            {{ delivery.customer.user.username}}
+			
+            
+          </td>
+		  <td class="align-middle">{{ delivery.restaurant.user.username }}</td>
+		  <td>
+		  <form  method="POST">
+		   {% csrf_token %}
+  <button type="submit" method ="Post" name ="Delivery" value =" {{delivery.id}}" class="btn btn-primary">Accept Delivery</button>
+</form>
+          
+
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

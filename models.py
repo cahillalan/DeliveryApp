@@ -15,6 +15,9 @@ class Customer(models.Model):
     cardDetails = models.ForeignKey(CardDetails , on_delete = models.CASCADE, related_name = 'card_details')
     firstname = models.CharField(max_length = 255)
     lastname = models.CharField(max_length = 255)
+    contactnumber = models.DecimalField(max_digits = 10,decimal_places = 0,null = True)
+
+
 
 
 class Restaurant(models.Model):
@@ -22,7 +25,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=255)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menu')
     name = models.CharField(max_length = 255)
-    contactnumber = models.PositiveIntegerField(default=0)
+    contactnumber = models.DecimalField(max_digits = 10,decimal_places = 0,null = True)
     managersName = models.CharField(max_length = 255)
     typeoffood = models.CharField(max_length = 255)
 
@@ -33,4 +36,8 @@ class Driver(models.Model):
     typeofvehicle = models.CharField(max_length = 255)
     lastdelivery = models.DateTimeField(default=datetime.now(), blank=True)
     availablefordelivery= models.BooleanField(default=True)
+    contactnumber = models.DecimalField(max_digits = 10,decimal_places = 0,null = True)
+    currentorder = models.PositiveIntegerField(null = True)
+
+
 

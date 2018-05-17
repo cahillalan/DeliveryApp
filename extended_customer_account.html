@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
-
+{% block maincontent %}
+{% endblock %}
 
 {% block mainbody %}
   <div class="container">
@@ -8,8 +9,13 @@
     <form method="post" novalidate>
       {% csrf_token %}
       {{ form.as_p }} 
-	  <a href="{% url 'extended_driver_account' %}">Extended Account</a>
-  	  
+	  <br>
+	  <a href="{% url 'card_details' %}">Payment Details</a><br>
+	  <a href="{% url 'customer_address' %}">Address Update</a><br>
+	  <a href="{% url 'customer_statistics' %}">Statistics</a>
+	  <a href="{% url 'customer_account'%}">Account</a>
+
+
 
 	  
 	  <br></br>

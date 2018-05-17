@@ -9,11 +9,11 @@ Edit Card Details
     <div class="col-lg-6 col-md-8 col-sm-10">
       <form method="post" novalidate>
         {% csrf_token %}
-	<input type="Number" name="cardNumber" value = "{{card.cardNumber}}"/><br>
-	<input type="Number" name="securityNumber" value = "{{card.securityNumber}}"/><br>
-	<input type="Text" name="CardHolderName" value = "{{card.cardHolderName}}"/><br>
-	<input type="Number" name="pinNumber" value = "{{card.pinNumber}}"/><br>
-	{{card.expiryDate}}<br>
+	Card Number:<input type="Number" name="cardNumber" label ="Card Number"value = "{{card.cardNumber}}"/><br>
+	Security Number:<input type="Number" name="securityNumber" label ="Security Number"value = "{{card.securityNumber}}"/><br>
+	Card Holder Name:<input type="Text" name="CardHolderName"label ="Card Holder Name" value = "{{card.cardHolderName}}"/><br>
+	Pin Number:<input type="Number" name="pinNumber" label ="Pin Number"value = "{{card.pinNumber}}"/><br>
+	Expiry Date:<input type="Date" name ="expiryDate" label ="Expiry Date" value ="{{card.expiryDate}}"?><br>
 
 
 		

@@ -23,6 +23,20 @@
             {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
           ],
           color: 'green'
+      },
+	  {
+          name: 'Completed',
+          data: [
+            {% for entry in dataset %}{{ entry.confirmed }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'red'
+      },
+	  {
+          name: 'NotCompleted',
+          data: [
+            {% for entry in dataset %}{{ entry.notconfirmed }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'blue'
       }]
   });
 </script>
